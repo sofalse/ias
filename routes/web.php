@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
-Route::post('/password/{id}', 'HomeController@password')->name('changePassword');
+Route::post('/password', 'HomeController@password')->name('changePassword');
+Route::post('/avatar', 'HomeController@avatar')->name('changeAvatar');
 Route::resource('gpx', 'GPXController')->except('show'); // TODO: GPX Show
 Route::resource('lyric', 'LyricsController'); // TODO" Lyrics Show

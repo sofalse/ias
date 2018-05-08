@@ -34,6 +34,7 @@ const app = new Vue({
                 })
             }
         },
+
         print: function() {
             window.print();
         }

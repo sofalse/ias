@@ -54,7 +54,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img class="avatar" src="https://placeimg.com/32/32/any">   Hi, {{ Auth::user()->name }}! <span class="caret"></span>
+                                    <img class="avatar" src="@if(Auth::user()->avatar == null)https://placeimg.com/32/32/any @elseif(strpos(Auth::user()->avatar, '://')) {!! Auth::user()->avatar !!} @else /files/avatars/{!! Auth::user()->avatar !!} @endif">   Hi, {{ Auth::user()->name }}! <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

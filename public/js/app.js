@@ -13902,6 +13902,7 @@ var app = new Vue({
                 });
             }
         },
+
         print: function print() {
             window.print();
         }

@@ -22,11 +22,10 @@
                 <div class="modal fade" id="pwd-change" tabindex="-1" role="dialog" aria-labelledby="Change password" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            {!! Form::open(['route' => ['changePassword', Auth::id()]]) !!}
+                            {!! Form::open(['route' => 'changePassword']) !!}
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+                                <h5 class="modal-title" id="passwordChange">Change password</h5>
                                 <div class="pull-right">
-                                    <a @click="print" href="#" class="mt-auto mb-auto"><span aria-hidden="true" class="fa fa-lg fa-print"></span></a>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -54,6 +53,38 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="modal fade" id="avatar-change" tabindex="-1" role="dialog" aria-labelledby="Change avatar" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            {!! Form::open(['route' => 'changeAvatar', 'files' => 'true']) !!}
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="avatarChange">Change avatar</h5>
+                                <div class="pull-right">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="modal-body align-self-center text-center">
+                                    <div class="form-group">
+                                        {!! Form::label('url', 'Enter URL: ') !!}
+                                        {!! Form::text('url', '',  ['class' => 'form-control']) !!}
+                                    </div>
+                                    <div class="form-group">
+                                        {!! Form::label('avatar_file', 'Or upload from a file: ') !!}
+                                        <small class="text-muted">(max. 2MB; PNG and JPG accepted only)</small>
+                                        {!! Form::file('avatar_file') !!}
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+                                {!! Form::close() !!}
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-8">
                         <p><b>Nickname: </b> {{ Auth::user()->name }}</p>
@@ -63,7 +94,7 @@
                     <div class="col-4 pull-right">
                         <div class="btn-group" role="group" aria-label="Profile actions">
                             <button class="btn btn-md btn-primary" data-toggle="modal" data-target="#pwd-change">Change password</button>
-                            <button class="btn btn-md btn-primary">Change avatar</button>
+                            <button class="btn btn-md btn-primary" data-toggle="modal" data-target="#avatar-change">Change avatar</button>
                         </div>
                     </div>
                 </div>

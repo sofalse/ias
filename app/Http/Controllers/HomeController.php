@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use App\Rules\ImageURL;
 
 class HomeController extends Controller
 {
@@ -50,10 +51,9 @@ class HomeController extends Controller
      * Change user's password.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function password(Request $request, $id) {
+    public function password(Request $request) {
         $valid = $request->validate([
             'current' => 'required',
             'new' => 'required|string|min:6|max:32',
@@ -79,5 +79,41 @@ class HomeController extends Controller
         $user -> save();
         Session::flash('status', 'Password changed successfully.');
         return redirect()->route('profile');
+    }
+
+    /**
+     * Change user's avatar.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function avatar(Request $request) {
+        $user = User::find(Auth::id());
+        if($request->hasFile('avatar_file')) {
+            $validation = $request->validate([
+                'avatar_file' => 'file|mimes:jpeg,png,jpg|max:2048'
+            ]);
+            $filename = Auth::user()->name.'_'.time().'.'.$request->file('avatar_file')->getClientOriginalExtension();
+            $destinationPath = public_path().'/files/avatars';
+            $request->file('avatar_file')->move($destinationPath, $filename);
+            if(strpbrk($user->avatar, '/') === false) {
+                unlink($destinationPath.'\\'.$user->avatar);
+            }
+            $user->avatar = $filename;
+            $user->save();
+            Session::flash('status', 'Avatar has been successfully set.');
+            return redirect()->route('profile');
+        } else {
+            $validation = $request->validate([
+                'url' => ['required', 'url', 'max:255', new ImageURL()]
+            ]);
+            if(strpbrk($user->avatar, '/') === false) {
+                unlink(public_path().'\\files\\avatars\\'.$user->avatar);
+            }
+            $user->avatar = $request->url;
+            $user->save();
+            Session::flash('status', 'Avatar has been successfully set.');
+            return redirect()->route('profile');
+        }
     }
 }
