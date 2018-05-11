@@ -81,7 +81,7 @@ class LyricsController extends Controller
     {
         $gpx = GPX::whereNull('lyric_id')->pluck('name', 'id');
         $lyric = Lyric::find($id);
-        $this->authorize('update', $lyric->user->id);
+        $this->authorize('edit', $lyric->user->id);
         return view('lyric.edit')->withGpx($gpx)->withLyric($lyric);
     }
 
@@ -95,7 +95,7 @@ class LyricsController extends Controller
     public function update(Request $request, $id)
     {
         $old = Lyric::find($id);
-        $this->authorize('update', $old->user->id);
+        $this->authorize('edit', $old->user->id);
         $valid = $request->validate([
             'title' => 'min:3|max:32',
             'htmlc' => 'min:6',
@@ -136,7 +136,7 @@ class LyricsController extends Controller
     public function destroy($id)
     {
         $lyric = Lyric::Find($id);
-        $this->authorize('update', $lyric->user->id);
+        $this->authorize('edit', $lyric->user->id);
         try {
             $lyric->delete();
         } catch (\Exception $e) {
