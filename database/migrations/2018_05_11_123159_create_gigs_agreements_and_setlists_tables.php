@@ -55,7 +55,7 @@ class CreateGigsAgreementsAndSetlistsTables extends Migration
             $table->foreign('gig_id')->references('id')->on('gigs')->onDelete('set null');
         });
 
-        Schema::table('gigs', function (Blueprint $table) {
+        Schema::table('agreements', function (Blueprint $table) {
             $table->foreign('gig_id')->references('id')->on('gigs')->onDelete('set null');
         });
     }
