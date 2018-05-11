@@ -30,10 +30,21 @@ class AuthServiceProvider extends ServiceProvider
         /**
          * Ability to register new users.
          * Required role: 2 (admin)
-         * @param User $user
+         * @param App\User $user
+         * @return boolean
          */
         Gate::define('register-user', function() {
             return Auth::user()->role == 2;
+        });
+
+        /**
+         * Ability to edit its own content.
+         * Required to be an author of the content.
+         * @param int $author
+         * @return boolean
+         */
+        Gate::define('edit', function($user, $author) {
+            return $user->id === $author || $user->role === 2;
         });
     }
 }

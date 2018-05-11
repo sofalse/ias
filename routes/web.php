@@ -17,5 +17,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/profile', 'HomeController@profile')->name('profile');
 Route::post('/password', 'HomeController@password')->name('changePassword');
 Route::post('/avatar', 'HomeController@avatar')->name('changeAvatar');
-Route::resource('gpx', 'GPXController')->except('show'); // TODO: GPX Show
+Route::resource('gpx', 'GPXController')->except('show');
 Route::resource('lyric', 'LyricsController'); // TODO" Lyrics Show
+Route::resource('gig', 'GigsController');

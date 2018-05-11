@@ -96,7 +96,7 @@ class HomeController extends Controller
             $filename = Auth::user()->name.'_'.time().'.'.$request->file('avatar_file')->getClientOriginalExtension();
             $destinationPath = public_path().'/files/avatars';
             $request->file('avatar_file')->move($destinationPath, $filename);
-            if(strpbrk($user->avatar, '/') === false) {
+            if(strpbrk($user->avatar, '/') === false && $user->avatar !== null) {
                 unlink($destinationPath.'\\'.$user->avatar);
             }
             $user->avatar = $filename;

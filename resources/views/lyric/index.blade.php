@@ -52,7 +52,7 @@
                     @else
                         <td><i>No GPXes found. <a href="{{ route('gpx.create') }}">Add one!</a></i></td>
                     @endif
-                    <td><a href="#text-{{ $lyric->id }}" data-toggle="modal" data-target="#text-{{ $lyric->id }}">Show</a> | <a href=" {{ route('lyric.edit', ['id' => $lyric->id]) }}">Edit</a></td>
+                <td><a href="#text-{{ $lyric->id }}" data-toggle="modal" data-target="#text-{{ $lyric->id }}">Show</a> @can('edit', $lyric->user->id)| <a href=" {{ route('lyric.edit', ['id' => $lyric->id]) }}">Edit</a> @endcan</td>
                 </tr>
             @endforeach
             </tbody>

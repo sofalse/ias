@@ -75,6 +75,7 @@ class GPXController extends Controller
     {
         $lyrics = Lyric::whereNull('gpx_id')->pluck('title', 'id');
         $gpx = GPX::find($id);
+        $this->authorize('update', $gpx->user->id);
         return view('gpx.edit')->withGpx($gpx)->withLyrics($lyrics);
     }
 
@@ -88,6 +89,7 @@ class GPXController extends Controller
     public function update(Request $request, $id)
     {
         $old = GPX::find($id);
+        $this->authorize('update', $old->user->id);
         $v = 0.0;
         $gpx = $request->validate([
             'name' => 'required|min:3|max:64',
@@ -130,6 +132,7 @@ class GPXController extends Controller
     public function destroy($id)
     {
         $gpx = GPX::find($id);
+        $this->authorize('update', $gpx->user->id);
         try {
             $gpx->delete();
         } catch (\Exception $e) {

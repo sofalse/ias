@@ -27,7 +27,7 @@ class LyricsController extends Controller
      */
     public function create()
     {
-        return view('lyric.create')->withGpxes(GPX::all()->pluck('name', 'id'));
+        return view('lyric.create')->withGpxes(GPX::whereNull('lyric_id')->pluck('name', 'id'));
     }
 
     /**
@@ -50,6 +50,10 @@ class LyricsController extends Controller
         $out -> user_id = Auth::id();
         if($request -> gpx != null) {
             $out -> gpx_id = $request -> gpx;
+        }
+        if($out->gpx_id != null) {
+            $g = GPX::where('id', $out->gpx_id);
+            $g -> update(['lyric_id' => $out->id]);
         }
         $out -> save();
         Session::flash('status', 'Successfully aded new lyrics!');
@@ -75,8 +79,9 @@ class LyricsController extends Controller
      */
     public function edit($id)
     {
-        $gpx = GPX::all()->pluck('name', 'id');
+        $gpx = GPX::whereNull('lyric_id')->pluck('name', 'id');
         $lyric = Lyric::find($id);
+        $this->authorize('update', $lyric->user->id);
         return view('lyric.edit')->withGpx($gpx)->withLyric($lyric);
     }
 
@@ -90,6 +95,7 @@ class LyricsController extends Controller
     public function update(Request $request, $id)
     {
         $old = Lyric::find($id);
+        $this->authorize('update', $old->user->id);
         $valid = $request->validate([
             'title' => 'min:3|max:32',
             'htmlc' => 'min:6',
@@ -105,6 +111,11 @@ class LyricsController extends Controller
                 $g -> update(['lyric_id' => null]);
             }
             $old->gpx_id = $request->gpx;
+            
+        if($old->gpx_id != null) {
+            $g = GPX::where('id', $old->gpx_id);
+            $g -> update(['lyric_id' => $old->id]);
+        }
         }
 
         if($request->htmlc != $old->md_text) {
@@ -125,6 +136,7 @@ class LyricsController extends Controller
     public function destroy($id)
     {
         $lyric = Lyric::Find($id);
+        $this->authorize('update', $lyric->user->id);
         try {
             $lyric->delete();
         } catch (\Exception $e) {

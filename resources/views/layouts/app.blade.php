@@ -43,6 +43,9 @@
                         <li class="nav-item {{ Route::is('lyric.index') ? 'active': '' }}">
                             <a class="nav-link" href="{{ route('lyric.index') }}">Lyrics</a>
                         </li>
+                        <li class="nav-item {{ Route::is('gig.index') ? 'active': '' }}">
+                            <a class="nav-link" href="{{ route('gig.index') }}">Gigs</a>
+                        </li>
                         @endauth
                     </ul>
 

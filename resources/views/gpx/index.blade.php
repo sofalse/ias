@@ -32,7 +32,7 @@
                     @else
                         <td><i>No lyrics found. <a href="{{ route('lyric.create') }}">Add one!</a></i></td>
                     @endif
-                    <td><a href="{{ 'files/gpx/'.$gpx->filePath }}">Download</a> | <a href="{{ route('gpx.edit', ['id' => $gpx->id]) }}">Update</a></td>
+                    <td><a href="{{ 'files/gpx/'.$gpx->filePath }}">Download</a> @can('edit', $gpx->user->id)| <a href="{{ route('gpx.edit', ['id' => $gpx->id]) }}">Update</a>@endcan</td>
                 </tr>
             @endforeach
             </tbody>

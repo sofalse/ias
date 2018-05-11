@@ -87,7 +87,17 @@
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        <p><b>Nickname: </b> {{ Auth::user()->name }}</p>
+                        <p><b>Nickname: </b> {{ Auth::user()->name }}<br />
+                        <em><small class="text-muted">
+                            @switch(Auth::user()->role)
+                                @case(1)
+                                    User
+                                    @break
+                                @case(2)
+                                    Administrator
+                                    @break
+                            @endswitch
+                        </small></em></p>
                         <p><b>Added GPX: </b> {{ $gpx }}</p>
                         <p><b>Added lyrics: </b> {{ $lyrics }}</p>
                     </div>
