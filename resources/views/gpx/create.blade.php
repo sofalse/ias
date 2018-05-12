@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container text-center">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -14,12 +14,12 @@
 
         <h1>Add new GPX</h1>
         {!! Form::open(['route' => 'gpx.store', 'files' => 'true']) !!}
-            <div class="form-group">
+            <div class="form-group mt-3">
                 {!! Form::label('name', 'Title:') !!}
                 {!! Form::text('name', '', ['class' => 'form-control']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('gpx_file', 'GPX File:') !!}
+                {!! Form::label('gpx_file', 'GPX File:') !!}<br />
                 {!! Form::file('gpx_file') !!}
             </div>
             <div class="form-group">

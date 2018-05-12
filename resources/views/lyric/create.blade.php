@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container text-center">
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -18,7 +18,7 @@
 
         <h1>Add new lyrics</h1>
         {!! Form::open(['route' => 'lyric.store']) !!}
-        <div class="form-group">
+        <div class="form-group mt-3">
             {!! Form::label('title', 'Title:') !!}
             {!! Form::text('title', '', ['class' => 'form-control']) !!}
         </div>

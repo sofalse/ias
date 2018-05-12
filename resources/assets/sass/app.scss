@@ -20,11 +20,9 @@
   margin-right: 3px;
 }
 
-//@media print
-//{
-//  .not-printable { display: none; }
-//  .printable { display: block; }
-//}
+.h-fill {
+  height: 100vh;
+}
 
 @media print {
   .printable {

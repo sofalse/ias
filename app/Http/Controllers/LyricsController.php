@@ -51,11 +51,10 @@ class LyricsController extends Controller
         if($request -> gpx != null) {
             $out -> gpx_id = $request -> gpx;
         }
-        if($out->gpx_id != null) {
-            $g = GPX::where('id', $out->gpx_id);
-            $g -> update(['lyric_id' => $out->id]);
-        }
         $out -> save();
+        if($out->gpx_id != null) {
+            $g = GPX::where('id', $out->gpx_id)->update(['lyric_id' => $out->id]);
+        }
         Session::flash('status', 'Successfully aded new lyrics!');
         return redirect()->route('lyric.index');
     }
@@ -107,7 +106,7 @@ class LyricsController extends Controller
 
         if($request->gpx != $old->gpx_id) {
             if($request->gpx == null ) {
-                $g =GPX::find($old->gpx_id);
+                $g = GPX::find($old->gpx_id);
                 $g -> update(['lyric_id' => null]);
             }
             $old->gpx_id = $request->gpx;
