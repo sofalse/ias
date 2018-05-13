@@ -15,15 +15,15 @@
         <h1>Add new gig</h1>
         {!! Form::open(['route' => 'gig.store', 'files' => 'true']) !!}
             <div class="form-group mt-3">
-                {!! Form::label('title', 'Title:') !!}
+                {!! Form::label('title', 'Name:*') !!}
                 {!! Form::text('title', '', ['class' => 'form-control', 'required']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('venue', 'Venue:') !!}
+                {!! Form::label('venue', 'Venue:*') !!}
                 {!! Form::text('venue', '', ['class' => 'form-control', 'required']) !!}
             </div>
             <div class="form-group">
-                {!! Form::label('show_date', 'Date:') !!}
+                {!! Form::label('show_date', 'Date:*') !!}
                 <input type="datetime-local" name="show_date" id="show_date" class="form-control" required>
             </div>
             <div class="form-group">

@@ -10,7 +10,7 @@
         <table id="gpxTable" class="table table-bordered table-hover">
             <thead>
                 <th>ID</th>
-                <th>Title</th>
+                <th>Name</th>
                 <th>Venue</th>
                 <th>Date</th>
                 <th>Payout</th>
