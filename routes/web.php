@@ -20,3 +20,4 @@ Route::post('/avatar', 'HomeController@avatar')->name('changeAvatar');
 Route::resource('gpx', 'GPXController')->except('show');
 Route::resource('lyric', 'LyricsController'); // TODO" Lyrics Show
 Route::resource('gig', 'GigsController');
+Route::resource('setlist', 'SetlistsController');

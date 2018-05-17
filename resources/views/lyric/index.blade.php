@@ -20,7 +20,7 @@
             </thead>
             <tbody>
             @foreach($lyrics as $lyric)
-                <div class="modal fade" id="text-{{ $lyric->id }}" tabindex="-1" role="dialog" aria-labelledby="Change password" aria-hidden="true">
+                <div class="modal fade" id="text-{{ $lyric->id }}" tabindex="-1" role="dialog" aria-labelledby="Lyrics text" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

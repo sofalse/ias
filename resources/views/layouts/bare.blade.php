@@ -21,9 +21,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('styles')
 </head>
-<body @if($overflow !== null) style="overflow: hidden" @endif>
+<body @if(isset($overflow)) style="overflow: hidden" @endif>
     <div id="app">
+        @yield('navbar')
         <main class="py-4">
+            @yield('status')
             @yield('content')
         </main>
     </div>

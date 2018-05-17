@@ -19,6 +19,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 const app = new Vue({
     el: '#app',
+    data: {
+        songs: 0,
+        encore: false,
+    },
     methods: {
         show: function() {
             if(confirm('Are you sure?')) {
